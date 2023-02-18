@@ -1,0 +1,140 @@
+{
+	"401": {
+		"1": {
+			"cross": ["Itsenäisyydenkatu"],
+			"lights": ["RV1A;R2", "RV1B;R3", "C;1", "A;2"]
+		},
+		"2": {
+			"cross": ["Sammonaukio itä"],
+			"lights": ["RV3;R2", "RV5;R3", "N;2", "X;3"]
+		},
+		"3": {
+			"cross": ["Teiskontie"],
+			"lights": ["RV4;R2", "O;2", "R;0"]
+		},
+		"4": {
+			"cross": ["Sammonaukio länsi"],
+			"lights": ["RV2;R2", "D;1", "B;2", "H;3"]
+		},
+		"5": {
+			"cross": ["Sammonkatu"],
+			"lights": ["RV6;R1", "P;1", "U;0"]
+		},
+		"6": {
+			"cross": ["Kalevan puistotie Pohjoinen"],
+			"lights": ["E;2", "F;3", "M;0"]
+		},
+		"7": {
+			"cross": ["Kalevan puistotie etelä"],
+			"lights": ["G;2", "K;0"]
+		}
+	},
+	"424": {
+		"1": {
+			"cross": ["Suojatie itä 1"],
+			"lights": ["RV1;R2", "A;2", "C;0"]
+		},
+		"2": {
+			"cross": ["Suojatie itä 2"],
+			"lights": ["RV3;R2", "F;2", "H;0"]
+		},
+		"3": {
+			"cross": ["Suojatie länsi 1"],
+			"lights": ["RV4;R2", "G;2", "K;0"]
+		},
+		"4": {
+			"cross": ["Suojatie länsi 2"],
+			"lights": ["RV2;R2", "B;2", "E;0"]
+		}
+	},
+	"509": {
+		"1": {
+			"cross": ["Iidesranta"],
+			"lights": ["A;2"]
+		},
+		"2": {
+			"cross": ["Messukylänkatu"],
+			"lights": ["E;1", "D;3"]
+		},
+		"3": {
+			"cross": ["Iidesranta"],
+			"lights": ["C;1", "B;2"]
+		}
+	},
+	"601": {
+		"1": {
+			"cross": ["Teiskontie itä"],
+			"lights": ["C;1", "A;2"]
+		},
+		"2": {
+			"cross": ["Teiskontie itä 2"],
+			"lights": ["K;2", "Ko;3"]
+		},
+		"3": {
+			"cross": ["Teiskontie länsi"],
+			"lights": ["M;1", "L;2"]
+		},
+		"4": {
+			"cross": ["Teiskontie länsi 2"],
+			"lights": ["B;2"]
+		},
+		"5": {
+			"cross": ["Kuntokatu"],
+			"lights": ["E;1"]
+		},
+		"6": {
+			"cross": ["Kissanmaankatu"],
+			"lights": ["N;2"]
+		}
+	},
+	"608": {
+		"1": {
+			"cross": ["Teiskontie itä"],
+			"lights": ["C;1", "A;2", "E;3"]
+		},
+		"2": {
+			"cross": ["Teiskontie länsi"],
+			"lights": ["D;1", "B;2"]
+		},
+		"3": {
+			"cross": ["Heikkilänkatu"],
+			"lights": ["F;2"]
+		},
+		"4": {
+			"cross": ["Niihamankatu"],
+			"lights": ["G;2"]
+		}
+	},
+	"663": {
+		"1": {
+			"cross": ["Kangasalantie itä"],
+			"lights": ["A;2"]
+		},
+		"2": {
+			"cross": ["Kangasalantie länsi"],
+			"lights": ["C;1", "B;2"]
+		},
+		"3": {
+			"cross": ["VT 9 ramppi"],
+			"lights": ["E;1", "D;3"]
+		}
+	},
+	"666": {
+		"1": {
+			"cross": ["Sammon valtatie itä"],
+			"lights": ["C;1", "A;2"]
+		},
+		"2": {
+			"cross": ["Sammon valtatie länsi"],
+			"lights": ["D;1", "B;2"]
+		},
+		"3": {
+			"cross": ["VT 9 Ramppi"],
+			"lights": ["E;2"]
+		},
+		"4": {
+			"cross": ["Aitolahdentie"],
+			"lights": ["F;2"]
+		}
+	}
+}
