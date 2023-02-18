@@ -25,9 +25,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
-Properties properties = new Properties()
-properties.load(project.rootProject.file('local.properties').newDataInputStream()) 
-def googlemapsApiKey = properties.getProperty('googlemaps.apiKey')
+def googlemapsApiKey = localProperties.getProperty('googlemaps.apiKey')
 
 android {
     compileSdkVersion 31
