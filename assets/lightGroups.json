@@ -47,6 +47,24 @@
 			"lights": ["RV2;R2", "B;2", "E;0"]
 		}
 	},
+	"428": {
+		"1": {
+			"cross": ["Suojatie itä 1"],
+			"lights": ["RV1;R2", "A;2", "C;0"]
+		},
+		"2": {
+			"cross": ["Suojatie itä 2"],
+			"lights": ["RV3;R2", "D;2", "E;0"]
+		},
+		"3": {
+			"cross": ["Suojatie länsi 1"],
+			"lights": ["RV4;R2", "F;2", "G;0"]
+		},
+		"4": {
+			"cross": ["Suojatie länsi 2"],
+			"lights": ["RV2;R2", "B;2", "C;0"]
+		}
+	},
 	"509": {
 		"1": {
 			"cross": ["Iidesranta"],
