@@ -1,7 +1,12 @@
 # TreTraffic
 
-TreTraffic app provides real-time information about traffic light intersections in Tampere
+TreTraffic app provides real-time information about traffic lights in Tampere.
+
+## Features
+
+- Shows real-time traffic light statuses at specific intersection.
+- Routes allows users to see the traffic light statuses at multiple intersections along a specific route.
+- Currently can show data from 8 intersections.
 
 ## Screenshots
-
-![Screenshot1](screenshot1.jpg)
+<img src="screenshot1.jpg" width="340" style="display: left">
