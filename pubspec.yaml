@@ -1,4 +1,4 @@
-name: tre_trafficv2
+name: tre_traffic
 description: A new Flutter project.
 
 # The following line prevents the package from being accidentally published to
@@ -36,7 +36,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   google_maps_flutter: ^2.2.1
   latlong2: ^0.8.1
-  dio: ^4.0.6
+  dio: ^5.1.2
   geolocator: ^8.2.0
   maps_toolkit: ^2.0.0
 

@@ -1,4 +1,4 @@
-package com.example.tre_trafficv2
+package com.allu.tretraffic
 
 import io.flutter.embedding.android.FlutterActivity
 
