@@ -29,6 +29,24 @@
 			"lights": ["G;2", "K;0"]
 		}
 	},
+	"423": {
+		"1": {
+			"cross": ["Teiskontie itään"],
+			"lights": ["RV1;R2", "C;1", "A;2", "F;0"]
+		},
+		"2": {
+			"cross": ["Teiskontie länteen"],
+			"lights": ["RV2;R2", "B;2", "J;0"]
+		},
+		"3": {
+			"cross": ["Kaupinkatu pohjoiseen"],
+			"lights": ["D;2", "M;0"]
+		},
+		"4": {
+			"cross": ["Kaupinkatu etelään"],
+			"lights": ["E;2", "N;0"]
+		}
+	},
 	"424": {
 		"1": {
 			"cross": ["Suojatie itä 1"],
