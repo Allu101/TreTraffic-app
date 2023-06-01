@@ -1,3 +1,4 @@
+// ignore_for_file: file_names
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -131,11 +132,11 @@ class _MapViewState extends State<MapView> {
 }
 
 class SlidePanel extends StatelessWidget {
-  List<String> intersectionNumbers = [];
+  List<String> intersectionDirectionsIds = [];
   ScrollController sc;
   Divider divider = const Divider(color: Colors.grey);
   
-  SlidePanel(this.sc, this.intersectionNumbers, {Key? key}) : super(key: key);
+  SlidePanel(this.sc, this.intersectionDirectionsIds, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -148,18 +149,18 @@ class SlidePanel extends StatelessWidget {
         } else if (snapshot.hasError) {
           return Text('Virhe haettaessa tietoja!' + snapshot.stackTrace.toString());
         } else {
-          return Center(child: Text("Loading..." + intersectionNumbers.join(", ")));
+          return Center(child: Text("Loading..." + intersectionDirectionsIds.join(", ")));
         }
       },);
   }
 
-  createDirectionRow(List<Widget> groupRows, Map<String, dynamic> directionGroup, Map<String, String> statuses) {
-    for (String deviceNro in directionGroup.keys) {
+  createDirectionRow(List<Widget> groupRows, Map<String, dynamic> directionGroup, Map<String, String> statuses, List<String> devices) {
+    for (String deviceNro in devices) {
       List<Widget> elements = [];
       Map<String, dynamic> devicesByDirection = directionGroup[deviceNro];
 
       for (String light in devicesByDirection["lights"]) {
-        List<String> idAndType = light.split(";"); 
+        List<String> idAndType = light.split(";");
         String status = statuses[idAndType[0]]!;
         elements.add(SizedBox(width: 80, child: Row(children: [currentLight(status), getIcon(idAndType[1])], mainAxisAlignment: MainAxisAlignment.center)));
       }
@@ -202,12 +203,13 @@ class SlidePanel extends StatelessWidget {
 
   getPanelRows() async {
     List<Widget> groupRows = <Widget>[];
-    String currentNro = intersectionNumbers[0].substring(0, 3);
-    
-    for (String nroCodes in intersectionNumbers) {
+    String currentIntersectionNro = intersectionDirectionsIds[0].substring(0, 3);
+    for (String nroCodes in intersectionDirectionsIds) {
       Map<String, String> statuses = {};
       String nextNro = nroCodes.split(';')[0];
-      if (nextNro != currentNro) {
+      List<String> devices = nroCodes.split(';')[1].split(':');
+      
+      if (nextNro != currentIntersectionNro) {
         groupRows.removeLast();
         groupRows.add(const Divider(color: Colors.grey, thickness: 2));
       }
@@ -219,8 +221,8 @@ class SlidePanel extends StatelessWidget {
         statuses.putIfAbsent(device["name"].toString().replaceAll("\"", "").replaceAll("_", ""), () => device["status"]);
       }
       Map<String, dynamic> directionGroup = getServer().getDirectionGroupsFromIntersection(nextNro)!;
-      createDirectionRow(groupRows, directionGroup, statuses);
-      currentNro = nextNro;
+      createDirectionRow(groupRows, directionGroup, statuses, devices);
+      currentIntersectionNro = nextNro;
     }
     return ListView(children: groupRows, controller: sc, padding: const EdgeInsets.all(16));
   }

@@ -4,13 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:maps_toolkit/maps_toolkit.dart' as mapTools;
-import 'MapView.dart';
+import 'map.dart';
 import 'panel.dart';
 import 'server.dart';
 
 final appBar = AppBar(title: const Text('Tre traffic'), backgroundColor: Colors.blue[900]);
 final Server _server = Server();
-
 
 bool nextReached = false;
 bool serviceEnabled = false;
@@ -116,10 +115,8 @@ class MyAppState extends State {
         });
   }
 
-  Future<Map<String, dynamic>> fetchIntersectionStatusData() async {
-    Map<String, dynamic> responseJson = await getJson('http://trafficlights.tampere.fi/api/v1/deviceState/tre$nextIntersectionNro');
-    responseJson.remove("responseTs");
-    responseJson.remove("timestamp");
+  Future<Map<String, dynamic>> fetchIntersectionStatusData(String intersectionNro) async {
+    Map<String, dynamic> responseJson = await getJson('http://trafficlights.tampere.fi/api/v1/deviceState/tre$intersectionNro');
     return responseJson;
   }
 
@@ -143,7 +140,7 @@ class MyAppState extends State {
     timerRun = true;
     nextIntersectionNro = _currentLigthGroupNumbers[0].substring(0, 3);
     
-    getServer().updateStatusData(nextIntersectionNro, await fetchIntersectionStatusData());
+    getServer().updateStatusData(nextIntersectionNro, await fetchIntersectionStatusData(nextIntersectionNro));
     panelController.show();
     _timer = Timer.periodic(const Duration(milliseconds: 140), (timer) {updateLightStatuses();});
   }
@@ -151,8 +148,7 @@ class MyAppState extends State {
   updateLightStatuses() async {
     for (String intersectionLightGroupIds in _currentLigthGroupNumbers) {
       String intersectionNro = intersectionLightGroupIds.substring(0, 3);
-      Map<String, dynamic> responseJson = await fetchIntersectionStatusData();
-
+      Map<String, dynamic> responseJson = await fetchIntersectionStatusData(intersectionNro);
       dynamic intersectionLights = getServer().intersectionsStatusData[intersectionNro];
       if (intersectionLights == null) {
         getServer().intersectionsStatusData.putIfAbsent(intersectionNro, () => responseJson);
