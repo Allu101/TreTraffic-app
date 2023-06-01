@@ -117,6 +117,8 @@ class MyAppState extends State {
 
   Future<Map<String, dynamic>> fetchIntersectionStatusData(String intersectionNro) async {
     Map<String, dynamic> responseJson = await getJson('http://trafficlights.tampere.fi/api/v1/deviceState/tre$intersectionNro');
+    responseJson.remove("responseTs");
+    responseJson.remove("timestamp");
     return responseJson;
   }
 
@@ -152,12 +154,13 @@ class MyAppState extends State {
       dynamic intersectionLights = getServer().intersectionsStatusData[intersectionNro];
       if (intersectionLights == null) {
         getServer().intersectionsStatusData.putIfAbsent(intersectionNro, () => responseJson);
+        continue;
       }
       dynamic responseList = responseJson["signalGroup"];
       for (int i = 0; i < responseList.length; i++) {
         dynamic deviceStatus = responseList[i]["status"];
         if (deviceStatus != intersectionLights["signalGroup"][i]["status"]) {
-          String newColor = deviceStatus + "";
+          String newColor = deviceStatus;
           responseList[i]["status"] = "x";
           getServer().updateStatusData(intersectionNro, responseJson);
           panelController.show();

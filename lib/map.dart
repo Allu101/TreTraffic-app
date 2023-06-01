@@ -160,9 +160,8 @@ class SlidePanel extends StatelessWidget {
       Map<String, dynamic> devicesByDirection = directionGroup[deviceNro];
 
       for (String light in devicesByDirection["lights"]) {
-        List<String> idAndType = light.split(";");
-        String status = statuses[idAndType[0]]!;
-        elements.add(SizedBox(width: 80, child: Row(children: [currentLight(status), getIcon(idAndType[1])], mainAxisAlignment: MainAxisAlignment.center)));
+        List<String> idAndType = light.split(";"); //[0] = status, [1] = type.
+        elements.add(SizedBox(width: 80, child: Row(children: [currentLight(statuses[idAndType[0]]!), getIcon(idAndType[1])], mainAxisAlignment: MainAxisAlignment.center)));
       }
       Widget row = Row(children: elements, crossAxisAlignment: CrossAxisAlignment.center);
 
