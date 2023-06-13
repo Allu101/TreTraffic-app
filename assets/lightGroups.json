@@ -5,15 +5,15 @@
 			"lights": ["RV1A;R2", "RV1B;R3", "C;1", "A;2"]
 		},
 		"2": {
-			"cross": ["Sammonaukio itä"],
+			"cross": ["Sammonaukio itään"],
 			"lights": ["RV3;R2", "RV5;R3", "N;2", "X;3"]
 		},
 		"3": {
-			"cross": ["Teiskontie"],
+			"cross": ["Teiskontie länteen"],
 			"lights": ["RV4;R2", "O;2", "R;0"]
 		},
 		"4": {
-			"cross": ["Sammonaukio länsi"],
+			"cross": ["Sammonaukio länteen"],
 			"lights": ["RV2;R2", "D;1", "B;2", "H;3"]
 		},
 		"5": {
@@ -21,11 +21,11 @@
 			"lights": ["RV6;R1", "P;1", "U;0"]
 		},
 		"6": {
-			"cross": ["Kalevan puistotie Pohjoinen"],
+			"cross": ["Kalevan puistotie pohjoiseen"],
 			"lights": ["E;2", "F;3", "M;0"]
 		},
 		"7": {
-			"cross": ["Kalevan puistotie etelä"],
+			"cross": ["Kalevan puistotie etelään"],
 			"lights": ["G;2", "K;0"]
 		}
 	},
@@ -49,69 +49,69 @@
 	},
 	"424": {
 		"1": {
-			"cross": ["Suojatie itä 1"],
+			"cross": ["Suojatie 1 itään"],
 			"lights": ["RV1;R2", "A;2", "C;0"]
 		},
 		"2": {
-			"cross": ["Suojatie itä 2"],
+			"cross": ["Suojatie 2 itään"],
 			"lights": ["RV3;R2", "F;2", "H;0"]
 		},
 		"3": {
-			"cross": ["Suojatie länsi 1"],
+			"cross": ["Suojatie 1 länteen"],
 			"lights": ["RV4;R2", "G;2", "K;0"]
 		},
 		"4": {
-			"cross": ["Suojatie länsi 2"],
+			"cross": ["Suojatie 2 länteen"],
 			"lights": ["RV2;R2", "B;2", "E;0"]
 		}
 	},
 	"428": {
 		"1": {
-			"cross": ["Suojatie itä 1"],
+			"cross": ["Suojatie 1 itään"],
 			"lights": ["RV1;R2", "A;2", "C;0"]
 		},
 		"2": {
-			"cross": ["Suojatie itä 2"],
+			"cross": ["Suojatie 2 itään"],
 			"lights": ["RV3;R2", "D;2", "E;0"]
 		},
 		"3": {
-			"cross": ["Suojatie länsi 1"],
+			"cross": ["Suojatie 1 länteen"],
 			"lights": ["RV4;R2", "F;2", "G;0"]
 		},
 		"4": {
-			"cross": ["Suojatie länsi 2"],
+			"cross": ["Suojatie 2 länteen"],
 			"lights": ["RV2;R2", "B;2", "C;0"]
 		}
 	},
 	"509": {
 		"1": {
-			"cross": ["Iidesranta"],
+			"cross": ["Messukylänkatu itään"],
 			"lights": ["A;2"]
 		},
 		"2": {
-			"cross": ["Messukylänkatu"],
+			"cross": ["Iidesranta"],
 			"lights": ["E;1", "D;3"]
 		},
 		"3": {
-			"cross": ["Iidesranta"],
+			"cross": ["Messukylänkatu länteen"],
 			"lights": ["C;1", "B;2"]
 		}
 	},
 	"601": {
 		"1": {
-			"cross": ["Teiskontie itä"],
+			"cross": ["Teiskontie 1 itään"],
 			"lights": ["C;1", "A;2"]
 		},
 		"2": {
-			"cross": ["Teiskontie itä 2"],
+			"cross": ["Teiskontie 2 itään"],
 			"lights": ["K;2", "Ko;3"]
 		},
 		"3": {
-			"cross": ["Teiskontie länsi"],
+			"cross": ["Teiskontie 1 länteen"],
 			"lights": ["M;1", "L;2"]
 		},
 		"4": {
-			"cross": ["Teiskontie länsi 2"],
+			"cross": ["Teiskontie 2 länteen"],
 			"lights": ["B;2"]
 		},
 		"5": {
@@ -123,13 +123,31 @@
 			"lights": ["N;2"]
 		}
 	},
+	"604": {
+		"1": {
+			"cross": ["Teiskontie itään"],
+			"lights": ["C;1", "A;2", "G;0"]
+		},
+		"2": {
+			"cross": ["Teiskontie länteen"],
+			"lights": ["D;1", "B;2"]
+		},
+		"3": {
+			"cross": ["Ritakatu"],
+			"lights": ["F;2", "J;0"]
+		},
+		"4": {
+			"cross": ["Lääkärinkatu"],
+			"lights": ["E;2", "K;0"]
+		}
+	},
 	"608": {
 		"1": {
-			"cross": ["Teiskontie itä"],
+			"cross": ["Teiskontie itään"],
 			"lights": ["C;1", "A;2", "E;3"]
 		},
 		"2": {
-			"cross": ["Teiskontie länsi"],
+			"cross": ["Teiskontie länteen"],
 			"lights": ["D;1", "B;2"]
 		},
 		"3": {
@@ -143,11 +161,11 @@
 	},
 	"663": {
 		"1": {
-			"cross": ["Kangasalantie itä"],
+			"cross": ["Kangasalantie itään"],
 			"lights": ["A;2"]
 		},
 		"2": {
-			"cross": ["Kangasalantie länsi"],
+			"cross": ["Kangasalantie länteen"],
 			"lights": ["C;1", "B;2"]
 		},
 		"3": {
@@ -157,11 +175,11 @@
 	},
 	"666": {
 		"1": {
-			"cross": ["Sammon valtatie itä"],
+			"cross": ["Sammon valtatie itään"],
 			"lights": ["C;1", "A;2"]
 		},
 		"2": {
-			"cross": ["Sammon valtatie länsi"],
+			"cross": ["Sammon valtatie länteen"],
 			"lights": ["D;1", "B;2"]
 		},
 		"3": {
