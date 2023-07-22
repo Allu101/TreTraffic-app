@@ -141,6 +141,24 @@
 			"lights": ["E;2", "K;0"]
 		}
 	},
+	"607": {
+		"1": {
+			"cross": ["Teiskontie itään"],
+			"lights": ["A;2", "D;3"]
+		},
+		"2": {
+			"cross": ["Teiskontie länteen"],
+			"lights": ["C;1", "B;2"]
+		},
+		"3": {
+			"cross": ["Irjalankatu"],
+			"lights": ["F;1", "E;2", "J;0"]
+		},
+		"4": {
+			"cross": ["ST1"],
+			"lights": ["G;3"]
+		}
+	},
 	"608": {
 		"1": {
 			"cross": ["Teiskontie itään"],
@@ -157,6 +175,20 @@
 		"4": {
 			"cross": ["Niihamankatu"],
 			"lights": ["G;2"]
+		}
+	},
+	"609": {
+		"1": {
+			"cross": ["Heikkilänkatu itään"],
+			"lights": ["A;2", "E;0"]
+		},
+		"2": {
+			"cross": ["Heikkilänkatu länteen"],
+			"lights": ["C;1", "B;2"]
+		},
+		"3": {
+			"cross": ["Lidl"],
+			"lights": ["D;2"]
 		}
 	},
 	"663": {
