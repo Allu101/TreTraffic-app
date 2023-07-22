@@ -158,9 +158,9 @@ class MyAppState extends State {
       }
       dynamic responseList = responseJson["signalGroup"];
       for (int i = 0; i < responseList.length; i++) {
-        dynamic deviceStatus = responseList[i]["status"];
-        if (deviceStatus != intersectionLights["signalGroup"][i]["status"]) {
-          String newColor = deviceStatus;
+        deviceStatus = responseList[i]["status"];
+        if (!getServer().isSameColor(deviceStatus, intersectionLights["signalGroup"][i]["status"])) {
+          newColor = deviceStatus;
           responseList[i]["status"] = "x";
           getServer().updateStatusData(intersectionNro, responseJson);
           panelController.show();

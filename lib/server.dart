@@ -72,6 +72,18 @@ class Server {
     return routes[routeName]!;
   }
 
+  bool isSameColor(String status1, String status2) {
+  if (status1 == status2) {
+    return true;
+  }
+  if (("ABCDEFGH9".contains(status1) && "ABCDEFGH9".contains(status2)) ||
+      (":<0".contains(status1) && ":<0".contains(status2)) ||
+      ("1345678".contains(status1) && "1345678".contains(status2))) {
+    return true;
+  }
+  return false;
+}
+
   updateStatusData(String intersectionNro, Map<String, dynamic> json) {
     intersectionsStatusData.update(intersectionNro, (_) => json, ifAbsent: () => json);
   }
