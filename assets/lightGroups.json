@@ -83,6 +83,20 @@
 			"lights": ["RV2;R2", "B;2", "C;0"]
 		}
 	},
+	"501": {
+		"1": {
+			"cross": ["Teiskontie itään"],
+			"lights": ["C;1", "A;2"]
+		},
+		"2": {
+			"cross": ["Teiskontie länteen"],
+			"lights": ["B;2", "D;3", "G;0", "L;0"]
+		},
+		"3": {
+			"cross": ["Ramppi"],
+			"lights": ["F;1", "E;3", "J;0"]
+		}
+	},
 	"509": {
 		"1": {
 			"cross": ["Messukylänkatu itään"],
