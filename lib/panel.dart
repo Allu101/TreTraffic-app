@@ -263,10 +263,10 @@ class _SlidingUpPanelState extends State<SlidingUpPanel>
                 builder: (context, child) {
                   return Positioned(
                     top: widget.parallaxEnabled ? _getParallax() : 0.0,
-                    child: child ?? SizedBox(),
+                    child: child ?? const SizedBox(),
                   );
                 },
-                child: Container(
+                child: SizedBox(
                   height: MediaQuery.of(context).size.height,
                   width: MediaQuery.of(context).size.width,
                   child: widget.body,
@@ -348,11 +348,9 @@ class _SlidingUpPanelState extends State<SlidingUpPanel>
                               (widget.padding != null
                                   ? widget.padding!.horizontal
                                   : 0),
-                          child: Container(
+                          child: SizedBox(
                             height: widget.maxHeight,
-                            child: widget.panel != null
-                                ? widget.panel
-                                : widget.panelBuilder!(_sc),
+                            child: widget.panel ?? widget.panelBuilder!(_sc),
                           )),
 
                       // header
@@ -365,7 +363,7 @@ class _SlidingUpPanelState extends State<SlidingUpPanel>
                                   widget.slideDirection == SlideDirection.DOWN
                                       ? 0.0
                                       : null,
-                              child: widget.header ?? SizedBox(),
+                              child: widget.header ?? const SizedBox(),
                             )
                           : Container(),
 
@@ -379,7 +377,7 @@ class _SlidingUpPanelState extends State<SlidingUpPanel>
                                   widget.slideDirection == SlideDirection.DOWN
                                       ? null
                                       : 0.0,
-                              child: widget.footer ?? SizedBox())
+                              child: widget.footer ?? const SizedBox())
                           : Container(),
 
                       // collapsed panel
@@ -397,7 +395,7 @@ class _SlidingUpPanelState extends State<SlidingUpPanel>
                             (widget.padding != null
                                 ? widget.padding!.horizontal
                                 : 0),
-                        child: Container(
+                        child: SizedBox(
                           height: widget.minHeight,
                           child: widget.collapsed == null
                               ? Container()

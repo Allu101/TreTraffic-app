@@ -26,7 +26,7 @@ late LocationPermission permission;
 late Timer _timer;
 late Timer locationUpdater;
 
-Distance distance = Distance();
+Distance distance = const Distance();
 
 void main() => runApp(MyApp()); 
 
@@ -49,12 +49,12 @@ class MyAppState extends State {
       home: SafeArea(child: Scaffold(
         appBar: appBar,
         body: SlidingUpPanel(
-          body: Container(child: MapView(), margin: EdgeInsets.only(bottom: 79)),
+          body: Container(child: MapView(), margin: const EdgeInsets.only(bottom: 79)),
           panelBuilder: (sc) => SlidePanel(sc, _currentLigthGroupNumbers),
           controller: panelController,
           borderRadius: const BorderRadius.only(topLeft: Radius.circular(30.0), topRight: Radius.circular(30.0)),
-          minHeight: 225,
-          maxHeight: 225,
+          minHeight: 230,
+          maxHeight: 230,
           isDraggable: false,
         ),
       )),
@@ -144,7 +144,7 @@ class MyAppState extends State {
     
     getServer().updateStatusData(nextIntersectionNro, await fetchIntersectionStatusData(nextIntersectionNro));
     panelController.show();
-    _timer = Timer.periodic(const Duration(milliseconds: 140), (timer) {updateLightStatuses();});
+    _timer = Timer.periodic(const Duration(milliseconds: 300), (timer) {updateLightStatuses();});
   }
 
   updateLightStatuses() async {
@@ -157,6 +157,8 @@ class MyAppState extends State {
         continue;
       }
       dynamic responseList = responseJson["signalGroup"];
+      dynamic deviceStatus = '';
+      String newColor = '';
       for (int i = 0; i < responseList.length; i++) {
         deviceStatus = responseList[i]["status"];
         if (!getServer().isSameColor(deviceStatus, intersectionLights["signalGroup"][i]["status"])) {

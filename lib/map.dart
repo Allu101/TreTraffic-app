@@ -31,7 +31,7 @@ class _MapViewState extends State<MapView> {
       polygons: _polygons,
       zoomControlsEnabled: false,
       onMapCreated: _onMapCreated,
-      onTap: (LatLng) {
+      onTap: (latLng) {
         updatePanelState(<String>[]);
       },
     ),
@@ -92,7 +92,7 @@ class _MapViewState extends State<MapView> {
       _polygons.add(Polygon(
         polygonId: PolygonId(getServer().triggerAreas[coordinates]!),
         points: points,
-        fillColor: Color.fromARGB(123, 69, 156, 226),
+        fillColor: const Color.fromARGB(123, 69, 156, 226),
         strokeWidth: 0));
     }
 
@@ -121,8 +121,7 @@ class _MapViewState extends State<MapView> {
       String intersectionNro = properties["liva_nro"];
 
       if (feature["geometry"] != null) {
-        Map<String, dynamic> geometry = feature["geometry"];
-        dynamic coordinates = geometry["coordinates"];
+        dynamic coordinates = feature["geometry"]["coordinates"];
         List<String> locs = coordinates.first.toString().replaceAll("[", "").replaceAll("]", "").split(",");
         
         getServer().getIntersectionLocs().putIfAbsent(intersectionNro, () => latlong2.LatLng(double.parse(locs.last), double.parse(locs.first)));
@@ -161,12 +160,12 @@ class SlidePanel extends StatelessWidget {
 
       for (String light in devicesByDirection["lights"]) {
         List<String> idAndType = light.split(";"); //[0] = status, [1] = type.
-        elements.add(SizedBox(width: 80, child: Row(children: [currentLight(statuses[idAndType[0]]!), getIcon(idAndType[1])], mainAxisAlignment: MainAxisAlignment.center)));
+        elements.add(SizedBox(width: 87, child: Row(children: [currentLight(statuses[idAndType[0]]!), getIcon(idAndType[1])], mainAxisAlignment: MainAxisAlignment.center)));
       }
       Widget row = Row(children: elements, crossAxisAlignment: CrossAxisAlignment.center);
 
       groupRows.addAll([Text(devicesByDirection["cross"]![0], textAlign: TextAlign.center),
-          SizedBox(child: row, height: 44), divider]);
+          SizedBox(child: row, height: 43), divider]);
     }
   }
 
@@ -184,15 +183,15 @@ class SlidePanel extends StatelessWidget {
     else if ("1345678".contains(status)) {
       color = Colors.green.shade900;
     }
-    return _icon(Icons.circle, size: 34, color: color);
+    return _icon(Icons.circle, size: 37, color: color);
   }
 
   Widget getIcon(String id) {
     switch (id) {
       case '0': return _icon(Icons.people_rounded, size: 23);
-      case '1': return _icon(Icons.arrow_back_rounded, size: 40);
-      case '2': return _icon(Icons.arrow_upward_rounded, size: 40);
-      case '3': return _icon(Icons.arrow_forward_rounded, size: 40);
+      case '1': return _icon(Icons.arrow_back_rounded, size: 39);
+      case '2': return _icon(Icons.arrow_upward_rounded, size: 39);
+      case '3': return _icon(Icons.arrow_forward_rounded, size: 39);
       case 'R1': return Row(children: [_icon(Icons.tram_outlined), _icon(Icons.arrow_back_rounded)]);
       case 'R2': return Row(children: [_icon(Icons.tram_outlined), _icon(Icons.arrow_upward_rounded)]);
       case 'R3': return Row(children: [_icon(Icons.tram_outlined), _icon(Icons.arrow_forward_rounded)]);
