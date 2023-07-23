@@ -14,6 +14,7 @@ final Server _server = Server();
 bool nextReached = false;
 bool serviceEnabled = false;
 bool timerRun = false;
+bool loadingData = true;
 
 List<String> _currentLigthGroupNumbers = [];
 List<String> currentValues = [];
@@ -63,7 +64,7 @@ class MyAppState extends State {
     );
   }
 
-  checkLocation(LatLng currentLoc) {
+  checkLocation(LatLng currentLoc, isHalfwayLoc) async {
     for (LatLng loc in areas.keys) {
       if (distance(LatLng(currentLoc.latitude, currentLoc.longitude), loc) < 40) {
         updatePanelContent(getServer().getRoute(areas[loc]));
@@ -74,17 +75,20 @@ class MyAppState extends State {
         updatePanelContent(getServer().getRoute(getServer().triggerAreas[coordinates]));
       }
     }
-
-    if (nextIntersectionNro != '') {
-      double distanceNextCross = distance(LatLng(currentLoc.latitude, currentLoc.longitude), getServer().getIntersectionLocs()[nextIntersectionNro]!);
-      if (!nextReached && distanceNextCross < 35) {
-        nextReached = true;
-      } else if (nextReached && distanceNextCross > 35) {
-        nextReached = false;
-        currentValues.removeWhere((nro) => nro.contains(nextIntersectionNro));
-        nextIntersectionNro = '';
-        if (currentValues.isEmpty) {
-          hidePanel();
+    if (!isHalfwayLoc) {
+      if (nextIntersectionNro != '') {
+        double distanceNextCross = distance(LatLng(currentLoc.latitude, currentLoc.longitude), getServer().getIntersectionLocs()[nextIntersectionNro]!);
+        if (!nextReached && distanceNextCross < 35) {
+          nextReached = true;
+        } else if (nextReached && distanceNextCross > 35) {
+          nextReached = false;
+          currentValues.removeWhere((nro) => nro.contains(nextIntersectionNro));
+          if (currentValues.isEmpty) {
+            nextIntersectionNro = '';
+            hidePanel();
+          } else {
+            nextIntersectionNro = currentValues[0].split(';')[0];
+          }
         }
       }
     }
@@ -97,7 +101,7 @@ class MyAppState extends State {
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
     }
-
+    
     const LocationSettings locationSettings = LocationSettings(
       accuracy: LocationAccuracy.best,
       distanceFilter: 0,
@@ -109,11 +113,13 @@ class MyAppState extends State {
     latestLocation = LatLng(pos.latitude, pos.longitude);
     Geolocator.getPositionStream(locationSettings: locationSettings).listen(
         (Position position) async {
-            checkLocation(LatLng(position.latitude, position.longitude));
+          if (!loadingData) {
+            checkLocation(LatLng(position.latitude, position.longitude), false);
             double halfwayLat = (latestLocation.latitude + position.latitude) / 2;
             double halfwayLong = (latestLocation.longitude + position.longitude) / 2;
 
-            checkLocation(LatLng(halfwayLat, halfwayLong));
+            checkLocation(LatLng(halfwayLat, halfwayLong), true);
+          }
         });
   }
 
@@ -133,6 +139,10 @@ class MyAppState extends State {
   }
 
   updatePanelContent(List<String> lightGroupNumbers) async {
+    if (currentValues == lightGroupNumbers) {
+      return;
+    }
+    currentValues = List<String>.from(lightGroupNumbers);
     if (lightGroupNumbers.isEmpty) {
       hidePanel();
       return;
@@ -146,10 +156,11 @@ class MyAppState extends State {
     
     getServer().updateStatusData(nextIntersectionNro, await fetchIntersectionStatusData(nextIntersectionNro));
     panelController.show();
-    _timer = Timer.periodic(const Duration(milliseconds: 300), (timer) {updateLightStatuses();});
+    _timer = Timer.periodic(const Duration(milliseconds: 250), (timer) {updateLightStatuses();});
   }
 
   updateLightStatuses() async {
+    _currentLigthGroupNumbers = List<String>.from(currentValues);
     for (String intersectionLightGroupIds in _currentLigthGroupNumbers) {
       String intersectionNro = intersectionLightGroupIds.substring(0, 3);
       Map<String, dynamic> responseJson = await fetchIntersectionStatusData(intersectionNro);
@@ -161,6 +172,9 @@ class MyAppState extends State {
       dynamic responseList = responseJson["signalGroup"];
       dynamic deviceStatus = '';
       String newColor = '';
+      if (responseList == null) {
+        continue;
+      }
       for (int i = 0; i < responseList.length; i++) {
         deviceStatus = responseList[i]["status"];
         if (!getServer().isSameColor(deviceStatus, intersectionLights["signalGroup"][i]["status"])) {
@@ -168,7 +182,7 @@ class MyAppState extends State {
           responseList[i]["status"] = "x";
           getServer().updateStatusData(intersectionNro, responseJson);
           panelController.show();
-          Future.delayed(const Duration(milliseconds: 130), () {
+          Future.delayed(const Duration(milliseconds: 100), () {
             responseList[i]["status"] = newColor;
             getServer().updateStatusData(intersectionNro, responseJson);
             panelController.show();

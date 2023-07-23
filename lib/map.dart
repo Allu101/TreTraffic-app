@@ -17,8 +17,6 @@ class _MapViewState extends State<MapView> {
   late GoogleMapController mapController;
   Set<Marker> _markers = {};
   Set<Polygon> _polygons = {};
-  
-  bool loadingData = true;
 
   @override
   Widget build(BuildContext context) {
@@ -80,8 +78,12 @@ class _MapViewState extends State<MapView> {
     await loadIntersectionLocations();
 
     for (String intersectionNro in getServer().getIntersectionLocs().keys) {
+      
       Map<String, dynamic> statusResponse = await getJson('http://trafficlights.tampere.fi/api/v1/deviceState/tre$intersectionNro');
       bool statusData = statusResponse.containsKey("signalGroup");
+      statusResponse.remove("responseTs");
+      statusResponse.remove("timestamp");
+      getServer().updateStatusData(intersectionNro, statusResponse);
       double color = BitmapDescriptor.hueYellow;
       setState(() {
         if (getServer().getIntersections()!.containsKey(intersectionNro)) {
@@ -127,6 +129,7 @@ class _MapViewState extends State<MapView> {
         getServer().getIntersectionLocs().putIfAbsent(intersectionNro, () => latlong2.LatLng(double.parse(locs.last), double.parse(locs.first)));
       }
     }
+    print(getServer().getIntersectionLocs());
   }
 }
 
