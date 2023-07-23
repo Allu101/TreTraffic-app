@@ -37,7 +37,7 @@ class _MapViewState extends State<MapView> {
     ),
 
     loadingData ? Positioned(
-        bottom: 10,
+        bottom: 5,
         left: 0,
         right: 0,
         child: Center(
@@ -79,6 +79,22 @@ class _MapViewState extends State<MapView> {
     await getServer().loadLigthGroups();
     await loadIntersectionLocations();
 
+    for (String intersectionNro in getServer().getIntersectionLocs().keys) {
+      Map<String, dynamic> statusResponse = await getJson('http://trafficlights.tampere.fi/api/v1/deviceState/tre$intersectionNro');
+      bool statusData = statusResponse.containsKey("signalGroup");
+      double color = BitmapDescriptor.hueYellow;
+      setState(() {
+        if (getServer().getIntersections()!.containsKey(intersectionNro)) {
+          color = BitmapDescriptor.hueGreen;
+          _markers.add(createClickableMarker(getServer().getIntersectionLocs()[intersectionNro]!, statusData ? color : BitmapDescriptor.hueRed, intersectionNro,
+            getServer().getAllDirectionsFromIntersection(intersectionNro)));
+        } else {
+          _markers.add(createMarker(getServer().getIntersectionLocs()[intersectionNro]!, statusData ? color : BitmapDescriptor.hueRed, intersectionNro));
+        }
+      });
+    }
+    loadingData = false;
+
     for (latlong2.LatLng loc in getServer().triggerPoints.keys) {
       _markers.add(createClickableMarker(latlong2.LatLng(loc.latitude, loc.longitude), BitmapDescriptor.hueBlue, getServer().triggerPoints[loc],
         getServer().getRoute(getServer().triggerPoints[loc]),
@@ -95,22 +111,6 @@ class _MapViewState extends State<MapView> {
         fillColor: const Color.fromARGB(123, 69, 156, 226),
         strokeWidth: 0));
     }
-
-    for (String intersectionNro in getServer().getIntersectionLocs().keys) {
-      Map<String, dynamic> statusResponse = await getJson('http://trafficlights.tampere.fi/api/v1/deviceState/tre$intersectionNro');
-      bool statusData = statusResponse.containsKey("signalGroup");
-      double color = BitmapDescriptor.hueYellow;
-      setState(() {
-        if (getServer().getIntersections()!.containsKey(intersectionNro)) {
-          color = BitmapDescriptor.hueGreen;
-          _markers.add(createClickableMarker(getServer().getIntersectionLocs()[intersectionNro]!, statusData ? color : BitmapDescriptor.hueRed, intersectionNro,
-            getServer().getAllDirectionsFromIntersection(intersectionNro)));
-        } else {
-          _markers.add(createMarker(getServer().getIntersectionLocs()[intersectionNro]!, statusData ? color : BitmapDescriptor.hueRed, intersectionNro));
-        }
-      });
-    }
-    loadingData = false;
   }
 
   loadIntersectionLocations() async {

@@ -46,18 +46,20 @@ class MyAppState extends State {
     checkPermissionAndStartLocStream();
     updatePanelState = updatePanelContent;
     return MaterialApp(
-      home: SafeArea(child: Scaffold(
-        appBar: appBar,
-        body: SlidingUpPanel(
-          body: Container(child: MapView(), margin: const EdgeInsets.only(bottom: 79)),
-          panelBuilder: (sc) => SlidePanel(sc, _currentLigthGroupNumbers),
-          controller: panelController,
-          borderRadius: const BorderRadius.only(topLeft: Radius.circular(30.0), topRight: Radius.circular(30.0)),
-          minHeight: 230,
-          maxHeight: 230,
-          isDraggable: false,
+      home: SafeArea(
+        child: Scaffold(
+          appBar: appBar,
+          body: SlidingUpPanel(
+            body: MapView(),
+            panelBuilder: (sc) => SlidePanel(sc, _currentLigthGroupNumbers),
+            controller: panelController,
+            borderRadius: const BorderRadius.only(topLeft: Radius.circular(30.0), topRight: Radius.circular(30.0)),
+            minHeight: 230,
+            maxHeight: 230,
+            isDraggable: false,
+          ),
         ),
-      )),
+      ),
     );
   }
 
