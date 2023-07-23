@@ -21,8 +21,7 @@ class Server {
 
   //LatLong, routeName
   Map<LatLng, String> triggerPoints = {
-    LatLng(61.498947, 23.784609): 'itsenäisyydenkatu:teiskontie',
-    LatLng(61.503598, 23.816772): 'tamk:sammonaukio',
+    LatLng(61.503598, 23.816772): 'tays:sammonaukio',
     LatLng(61.490728, 23.812822): 'vuohenoja:ita',
     LatLng(61.486406, 23.829730): 'vuohenoja:lansi',
     LatLng(61.478624, 23.871017): 'vt9S:messukylankatu',
@@ -35,14 +34,14 @@ class Server {
       mapTools.LatLng(61.497799, 23.879403), mapTools.LatLng(61.498015, 23.879873)]: 'linnainmaa:teiskontie',
 
     [mapTools.LatLng(61.498869, 23.782754), mapTools.LatLng(61.498859, 23.780938),
-      mapTools.LatLng(61.498978, 23.780947), mapTools.LatLng(61.498987, 23.782747)]: 'itsenäisyydenkatu:teiskontie',
+      mapTools.LatLng(61.498978, 23.780947), mapTools.LatLng(61.498987, 23.782747)]: 'itsenäisyydenkatu:hippos',
   };
 
   //Routename, [numero;suunta:suunta]
   Map<String, List<String>> routes = {
-    'itsenäisyydenkatu:teiskontie': ['428;1:2', '401;1:2', '424;1:2'],
+    'itsenäisyydenkatu:hippos': ['428;1:2', '401;1:2', '424;1:2', '423;1', '501;1', '601;1:2'],
     'linnainmaa:teiskontie': ['608;3'],
-    'tamk:sammonaukio': ['601;3:4'],
+    'tays:sammonaukio': ['601;3:4', '501;2', '423;2', '424;3:4', '401;3:4'],
     'vt9S:messukylankatu': ['663;3'],
     'vt9N:sammonvaltatie': ['666;3'],
     'vuohenoja:ita': ['509;1'],
