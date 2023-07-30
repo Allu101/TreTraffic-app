@@ -40,7 +40,7 @@ class Server {
   //Routename, [numero;suunta:suunta]
   Map<String, List<String>> routes = {
     'itsenäisyydenkatu:hippos': ['428;1:2', '401;1:2', '424;1:2', '423;1', '501;1', '601;1:2'],
-    'linnainmaa:teiskontie': ['608;3'],
+    'linnainmaa:teiskontie': ['609;2:3', '608;3', '607;2:3', '606;2:3', '605;2:3', '604;2:3'],
     'tays:sammonaukio': ['601;3:4', '501;2', '423;2', '424;3:4', '401;3:4'],
     'vt9S:messukylankatu': ['663;3'],
     'vt9N:sammonvaltatie': ['666;3'],
