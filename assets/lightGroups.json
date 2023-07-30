@@ -266,7 +266,7 @@
 	"609": {
 		"1": {
 			"cross": ["Heikkilänkatu itään"],
-			"lights": ["A;2", "E;0"]
+			"lights": ["A;2"]
 		},
 		"2": {
 			"cross": ["Heikkilänkatu länteen"],
@@ -274,7 +274,7 @@
 		},
 		"3": {
 			"cross": ["Lidl"],
-			"lights": ["D;2"]
+			"lights": ["D;2", "E;0"]
 		}
 	},
 	"663": {
