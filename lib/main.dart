@@ -40,7 +40,8 @@ class MyApp extends StatefulWidget {
 
 class MyAppState extends State {
   PanelController panelController = PanelController();
-  Map<LatLng, String> areas = getServer().triggerPoints;
+  Map<LatLng, String> triggerPoints = getServer().triggerPoints;
+  late StreamSubscription<Position> positionStream;
 
   @override
   Widget build(BuildContext context) {
@@ -65,9 +66,9 @@ class MyAppState extends State {
   }
 
   checkLocation(LatLng currentLoc, isHalfwayLoc) async {
-    for (LatLng loc in areas.keys) {
+    for (LatLng loc in triggerPoints.keys) {
       if (distance(LatLng(currentLoc.latitude, currentLoc.longitude), loc) < 40) {
-        updatePanelContent(getServer().getRoute(areas[loc]));
+        updatePanelContent(getServer().getRoute(triggerPoints[loc]));
       }
     }
     for (List<mapTools.LatLng> coordinates in getServer().triggerAreas.keys) {
@@ -96,31 +97,45 @@ class MyAppState extends State {
 
   checkPermissionAndStartLocStream() async {
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    Geolocator.getServiceStatusStream().listen(
+    (ServiceStatus status) {
+        if (status.toString().contains('enabled')) {
+          startPositionStream();
+        } else {
+          positionStream.cancel();
+        }
+    });
 
     permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
     }
-    
+    if (serviceEnabled) {
+      startPositionStream();
+    }
+  }
+
+  startPositionStream() async {
     const LocationSettings locationSettings = LocationSettings(
       accuracy: LocationAccuracy.best,
       distanceFilter: 0,
     );
-    Position? pos = await Geolocator.getLastKnownPosition();
-    if (pos == null) {
-      return;
-    }
-    latestLocation = LatLng(pos.latitude, pos.longitude);
-    Geolocator.getPositionStream(locationSettings: locationSettings).listen(
-        (Position position) async {
+    positionStream = Geolocator.getPositionStream(locationSettings: locationSettings).listen(
+        (Position? position) async {
+          if (position == null) {
+            return;
+          }
           if (!loadingData) {
+            latestLocation = LatLng(position.latitude, position.longitude);
+
             checkLocation(LatLng(position.latitude, position.longitude), false);
             double halfwayLat = (latestLocation.latitude + position.latitude) / 2;
             double halfwayLong = (latestLocation.longitude + position.longitude) / 2;
 
             checkLocation(LatLng(halfwayLat, halfwayLong), true);
           }
-        });
+        }
+    );
   }
 
   Future<Map<String, dynamic>> fetchIntersectionStatusData(String intersectionNro) async {
