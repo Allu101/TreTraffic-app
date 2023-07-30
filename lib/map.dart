@@ -30,6 +30,12 @@ class _MapViewState extends State<MapView> {
       zoomControlsEnabled: false,
       onMapCreated: _onMapCreated,
       onTap: (latLng) {
+        for (List<mapTools.LatLng> coordinates in getServer().triggerAreas.keys) {
+          if (mapTools.PolygonUtil.containsLocation(mapTools.LatLng(latLng.latitude, latLng.longitude), coordinates, false)) {
+            updatePanelState(getServer().getRoute(getServer().triggerAreas[coordinates]));
+            return;
+          }
+        }
         updatePanelState(<String>[]);
       },
     ),
@@ -78,7 +84,6 @@ class _MapViewState extends State<MapView> {
     await loadIntersectionLocations();
 
     for (String intersectionNro in getServer().getIntersectionLocs().keys) {
-      
       Map<String, dynamic> statusResponse = await getJson('http://trafficlights.tampere.fi/api/v1/deviceState/tre$intersectionNro');
       bool statusData = statusResponse.containsKey("signalGroup");
       statusResponse.remove("responseTs");
@@ -129,7 +134,6 @@ class _MapViewState extends State<MapView> {
         getServer().getIntersectionLocs().putIfAbsent(intersectionNro, () => latlong2.LatLng(double.parse(locs.last), double.parse(locs.first)));
       }
     }
-    print(getServer().getIntersectionLocs());
   }
 }
 
